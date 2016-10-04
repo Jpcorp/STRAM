@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yousoft.stram.persistence.dao.StatusVehiculeMapper">
+    
+    <resultMap id="statusVehicule" type="com.yousoft.stram.domain.StatusVehicule">
+        <result property="id" column="STSVEH_CDG_ID" />
+        <result property="name" column="STSVEH_NAME" />
+    </resultMap>
+        
+    <select id="findById" resultMap="statusVehicule" parameterType="com.yousoft.stram.domain.Vehicule">
+        SELECT
+            STSVEH_CDG_ID, 
+            STSVEH_NAME
+        FROM
+            STATUS_VEHICULE
+        <where>
+            <if test="statusVehicule.id != null and statusVehicule.id !=''">
+                STSVEH_CDG_ID =  #{statusVehicule.id, jdbcType=VARCHAR}
+            </if>	
+        </where>
+    </select>
+    
+    <!-- cambiar en el modelo (STSVEH_NAME) como int -->
+    <insert id="insertStatusVehicule" parameterType="com.yousoft.stram.domain.Vehicule"
+            useGeneratedKeys="true" keyProperty="STSVEH_CDG_ID">
+        INSERT INTO STATUS_VEHICULE 
+            (STSVEH_NAME) 
+        VALUES
+            (#{statusVehicule.name})
+    </insert>
+        
+</mapper>

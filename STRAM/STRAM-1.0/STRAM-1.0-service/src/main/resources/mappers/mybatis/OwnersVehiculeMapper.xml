@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yousoft.stram.persistence.dao.OwnersVehiculeMapper">
+    
+    <resultMap id="ownersVehicule" type="com.yousoft.stram.domain.OwnersVehicule">
+        <result property="run" column="OWSVEH_CDG_RUN" />
+        <result property="name" column="OWSVEH_NMB_NAME" />
+        <result property="phone" column="OWSVEH_TLF_PHONE" />
+        <result property="comuna" column="OWSVEH_DSC_COMUNA" />
+        <result property="direccion" column="OWSVEH_NMB_DIRECCION" />
+        <result property="nmroDireccion" column="OWSVEH_NMR_DIRNMRO" />
+        <result property="tlfHouse" column="OWSVEH_TLF_HOUSE" />
+        <result property="region" column="OWSVEH_DSC_REGION" />
+    </resultMap>
+        
+    <select id="findByRun" resultMap="ownersVehicule" parameterType="com.yousoft.stram.domain.Vehicule">
+        SELECT
+            OWSVEH_CDG_RUN, 
+            OWSVEH_NMB_NAME,
+            OWSVEH_TLF_PHONE,
+            OWSVEH_DSC_COMUNA,
+            OWSVEH_NMB_DIRECCION,
+            OWSVEH_NMR_DIRNMRO,
+            OWSVEH_TLF_HOUSE,
+            OWSVEH_DSC_REGION
+        FROM
+        OWNERS_VEHICULE
+        <where>
+            <if test="detailsOwners.ownersVehicule.run != null and detailsOwners.ownersVehicule.run !=''">
+                OWSVEH_CDG_RUN =  #{detailsOwners.ownersVehicule.run, jdbcType=VARCHAR}
+            </if>	
+        </where>
+    </select>
+    
+    <insert id="insertOwnersVehicule" parameterType="com.yousoft.stram.domain.Vehicule"
+        >
+        INSERT INTO OWNERS_VEHICULE 
+            (OWSVEH_CDG_RUN, OWSVEH_NMB_NAME, OWSVEH_TLF_PHONE, OWSVEH_DSC_COMUNA, OWSVEH_NMB_DIRECCION, OWSVEH_NMR_DIRNMRO, OWSVEH_TLF_HOUSE, OWSVEH_DSC_REGION) 
+        VALUES 
+            (#{detailsOwners.ownersVehicule.run}, #{detailsOwners.ownersVehicule.name}, #{detailsOwners.ownersVehicule.phone},
+             #{detailsOwners.ownersVehicule.comuna}, #{detailsOwners.ownersVehicule.direccion}, #{detailsOwners.ownersVehicule.nmroDireccion, jdbcType=INTEGER},
+             #{detailsOwners.ownersVehicule.tlfHouse}, #{detailsOwners.ownersVehicule.region})
+    </insert>
+  
+</mapper>

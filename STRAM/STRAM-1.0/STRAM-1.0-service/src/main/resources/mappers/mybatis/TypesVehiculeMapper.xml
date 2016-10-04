@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yousoft.stram.persistence.dao.TypesVehiculeMapper">
+    
+    <resultMap id="typesVehicule" type="com.yousoft.stram.domain.TypesVehicule">
+        <result property="id" column="TPSVEH_CDG_ID" />
+        <result property="name" column="TPSVEH_NMB_NAME" />
+        <result property="fechEntry" column="TPSVEH_DATE_REGISTER" />
+    </resultMap>
+        
+    <select id="findByName" resultMap="typesVehicule" parameterType="com.yousoft.stram.domain.Vehicule">
+        SELECT
+            TPSVEH_CDG_ID, 
+            TPSVEH_NMB_NAME,
+            TPSVEH_DATE_REGISTER 
+        FROM
+        TYPES_VEHICULE
+        <where>
+            <if test="modelsVehicule.typesVehicule.name != null and modelsVehicule.typesVehicule.name !=''">
+                TPSVEH_NMB_NAME LIKE  #{modelsVehicule.typesVehicule.name, jdbcType=VARCHAR}
+            </if>	
+        </where>
+    </select>
+    
+    <insert id="insertTypesVehicule" parameterType="com.yousoft.stram.domain.Vehicule"
+        useGeneratedKeys="true" keyProperty="TPSVEH_CDG_ID">
+        INSERT INTO TYPES_VEHICULE 
+            (TPSVEH_NMB_NAME,  TPSVEH_DATE_REGISTER)
+        VALUES 
+            (#{modelsVehicule.typesVehicule.name}, SYSDATE())
+    </insert>
+    
+    
+</mapper>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+          http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+          http://mybatis.org/schema/mybatis-spring   http://mybatis.org/schema/mybatis-spring-1.2.xsd">
+    
+    <!-- enabling annotation driven configuration /-->
+    <context:annotation-config/>
+    
+    <tx:annotation-driven />
+    
+    <!-- context:component-scan base-package="com.yousoft.stram.persistence.**" -->
+    
+    <!--context:property-placeholder location="classpath:/properties/application.properties"/-->
+    <!--bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:database.properties"/>
+    </bean-->
+    
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/stram" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <bean id="springManagedTransactionFactory" class="org.mybatis.spring.transaction.SpringManagedTransactionFactory" >
+        <constructor-arg index="0" ref="dataSource" />
+    </bean>
+    
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mapperLocations" value="classpath*:mappers/**/*.xml" />
+        <!--property name="configurationProperties" value="classpath*:mybatis-config.xml" /-->
+        <property name="transactionFactory" ref="springManagedTransactionFactory" />
+        
+    </bean>
+    
+    <!-- A partir de este punto ponemos la definición de las interfaces mappers -->
+    <bean id="typesVehiculeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+        <property name="mapperInterface" value="com.yousoft.stram.persistence.dao.TypesVehiculeMapper" />
+    </bean>
+    
+    <bean id="brandsVehiculeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+        <property name="mapperInterface" value="com.yousoft.stram.persistence.dao.BrandsVehiculeMapper" />
+    </bean>
+    
+    <bean id="modelsVehiculeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.yousoft.stram.persistence.dao.ModelsVehiculeMapper" />
+    </bean>
+    
+    <bean id="colorsVehiculeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.yousoft.stram.persistence.dao.ColorsVehiculeMapper" />
+    </bean>
+    
+    <bean id="detailsOwnersMapper" class="org.mybatis.spring.mapper.MapperFactoryBean" >
+        <property name="mapperInterface" value="com.yousoft.stram.persistence.dao.DetailsOwnersMapper" />
+    </bean>
+    
+    <bean id="vehiculeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.yousoft.stram.persistence.dao.VehiculeMapper" />
+    </bean>
+    
+    <bean id="statusVehiculeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.yousoft.stram.persistence.dao.StatusVehiculeMapper" />
+    </bean>
+      
+    <bean id="ownersVehiculeMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="com.yousoft.stram.persistence.dao.OwnersVehiculeMapper" />
+    </bean> 
+    <!-- /fin -->
+    
+    <!-- A partir de este punto ponemos la definición de los servicios siempre debe injectar sus mappers -->
+    <bean id="typesVehiculeService" class="com.yousoft.stram.persistence.dao.service.impl.TypesVehiculeServiceImpl">
+        <property name="typesVehiculeMapper" ref="typesVehiculeMapper" />
+    </bean> 
+    
+    <bean id="brandsVehiculeService" class="com.yousoft.stram.persistence.dao.service.impl.BrandsVehiculeServiceImpl">
+        <property name="brandsVehiculeMapper" ref="brandsVehiculeMapper" />
+    </bean>
+    
+    <bean id="modelsVehiculeService" class="com.yousoft.stram.persistence.dao.service.impl.ModelsVehiculeServiceImpl">
+        <property name="modelsVehiculeMapper" ref="modelsVehiculeMapper" />
+    </bean>
+    
+    <bean id="colorsVehiculeService" class="com.yousoft.stram.persistence.dao.service.impl.ColorsVehiculeServiceImpl">
+        <property name="colorsVehiculeMapper" ref="colorsVehiculeMapper" />
+    </bean>
+    
+    <bean id="vehiculeService" class="com.yousoft.stram.persistence.dao.service.impl.VehiculeServiceImpl" >
+        <property name="vehiculeMapper" ref="vehiculeMapper" />
+    </bean>
+    
+    <bean id="statusVehiculeService" class="com.yousoft.stram.persistence.dao.service.impl.StatusVehiculeServiceImpl">
+        <property name="statusVehiculeMapper" ref="statusVehiculeMapper" />
+    </bean>
+    
+    <bean id="detailsOwnersVehiculeService" class="com.yousoft.stram.persistence.dao.service.impl.DetailsOwnersVehiculeServiceImpl">
+    	<property name="detailsOwnersMapper" ref="detailsOwnersMapper"></property>
+    </bean>
+       
+    <bean id="ownersVehiculeService" class="com.yousoft.stram.persistence.dao.service.impl.OwnersVehiculeServiceImpl">
+        <property name="ownersVehiculeMapper" ref="ownersVehiculeMapper" />
+    </bean>
+    <!-- /fin -->
+    
+    <!-- los servicios -->    
+    <bean id="managerDocumentVehiculeService" class="com.yousoft.stram.service.beans.service.impl.ManagerDocumentVehiculeServiceImpl">
+        <property name="brandsVehiculeService" ref="brandsVehiculeService" />
+        <property name="colorsVehiculeService" ref="colorsVehiculeService" />
+        <property name="detailsOwnersVehiculeService" ref="detailsOwnersVehiculeService" />
+        <property name="modelsVehiculeService" ref="modelsVehiculeService" />
+        <property name="ownersVehiculeService" ref="ownersVehiculeService" />
+        <property name="typeVehiculeService" ref="typesVehiculeService" />
+        <property name="statusVehiculeService" ref="statusVehiculeService" />
+        <property name="vehiculeService" ref="vehiculeService" />            
+    </bean>
+    
+    <bean id="managerParserDocumentService" class="com.yousoft.stram.service.beans.service.impl.ManagerParserDocumentServiceImpl">
+        <property name="managerProcessDocument" ref="managerDocumentVehiculeService" />
+    </bean>
+    
+
+</beans>

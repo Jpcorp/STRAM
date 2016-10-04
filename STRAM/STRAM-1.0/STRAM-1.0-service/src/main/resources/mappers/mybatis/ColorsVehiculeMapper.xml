@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yousoft.stram.persistence.dao.ColorsVehiculeMapper">
+    
+    <resultMap id="colorsVehicule" type="com.yousoft.stram.domain.ColorsVehicule">
+        <result property="id" column="CLSVEH_CDG_ID" />
+        <result property="name" column="CLSVEH_NMB_NAME" />
+    </resultMap>
+        
+    <select id="findByName" resultMap="colorsVehicule" parameterType="com.yousoft.stram.domain.Vehicule">
+        SELECT
+            CLSVEH_CDG_ID, 
+            CLSVEH_NMB_NAME
+        FROM
+            COLORS_VEHICULE
+        <where>
+            <if test="colorsVehicule.name != null and colorsVehicule.name !=''">
+                CLSVEH_NMB_NAME LIKE  #{colorsVehicule.name, jdbcType=VARCHAR}
+            </if>	
+        </where>
+    </select>
+    
+    <insert id="insertColorsVehicule" parameterType="com.yousoft.stram.domain.Vehicule"
+        useGeneratedKeys="true" keyProperty="CLSVEH_CDG_ID">
+        INSERT INTO COLORS_VEHICULE 
+            (CLSVEH_NMB_NAME) 
+        VALUES
+            (#{colorsVehicule.name})
+    </insert>
+    
+    
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yousoft.stram.persistence.dao.VehiculeMapper">
+    
+    <resultMap id="vehicule" type="com.yousoft.stram.domain.Vehicule">
+        
+        <result property="patente" column="VEH_CDG_PATENTE" />
+        <result property="modelsVehicule.id" column="MLSVEH_CDG_ID" />
+        <result property="colorsVehicule.id" column="CLSVEH_CDG_ID" />
+        <result property="statusVehicule.id" column="STSVEH_CDG_ID" />
+        <result property="combustible" column="VEH_DSC_COMBUSTIBLE" />
+        <result property="nmrMotor" column="VEH_NMR_MOTOR" />
+        <result property="nmrChasis" column="VEH_NMR_CHASIS" />
+        <result property="pvr" column="VEH_DSC_PVR" />
+        <result property="nmrPoliza" column="VEH_NMR_POLIZA" />
+        <result property="venPoliza" column="VEH_FCH_VENPOLIZA" />
+        <result property="year" column="VEH_NMR_YEAR" />
+    </resultMap>
+        
+   <select id="getVehiculePatente" resultMap="vehicule" parameterType="com.yousoft.stram.domain.Vehicule">
+        SELECT
+            VEH_CDG_PATENTE, 
+            MLSVEH_CDG_ID,
+            CLSVEH_CDG_ID,
+            STSVEH_CDG_ID,
+            VEH_DSC_COMBUSTIBLE,
+            VEH_NMR_MOTOR,
+            VEH_NMR_CHASIS,
+            VEH_DSC_PVR,
+            VEH_NMR_POLIZA,
+            VEH_FCH_VENPOLIZA,
+            VEH_NMR_YEAR
+        FROM
+            VEHICULES
+        <where>
+            <if test="patente != null and patente !=''">
+                VEH_CDG_PATENTE =  #{patente, jdbcType=VARCHAR}
+            </if>	
+        </where>
+    </select>
+    
+    <insert id="insertVehicule" parameterType="com.yousoft.stram.domain.Vehicule">
+        
+    	INSERT INTO VEHICULES 
+            (VEH_CDG_PATENTE, MLSVEH_CDG_ID, CLSVEH_CDG_ID, STSVEH_CDG_ID, VEH_DSC_COMBUSTIBLE, VEH_NMR_MOTOR, 
+             VEH_NMR_CHASIS, VEH_DSC_PVR, VEH_NMR_POLIZA, VEH_FCH_VENPOLIZA, VEH_NMR_YEAR)
+        VALUES 
+            (#{patente}, #{modelsVehicule.id}, #{colorsVehicule.id}, #{statusVehicule.id}, #{combustible}, #{nmrMotor}, #{nmrChasis}, #{pvr}, #{nmrPoliza}, #{venPoliza, jdbcType=DATE}, #{year})
+    </insert>
+    
+</mapper>

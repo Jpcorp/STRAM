@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yousoft.stram.persistence.dao.ModelsVehiculeMapper">
+    
+    <resultMap id="modelsVehicule" type="com.yousoft.stram.domain.ModelsVehicule">
+        <result property="id" column="MLSVEH_CDG_ID" />
+        <result property="name" column="MLSVEH_NMB_NAME" />
+        <result property="typesVehicule.id" column="TPSVEH_CDG_ID" />
+        <result property="brandsVehicule.id" column="BRAVEH_CDG_ID" />
+    </resultMap>
+        
+    <select id="findByName" resultMap="modelsVehicule" parameterType="com.yousoft.stram.domain.Vehicule">
+        SELECT
+        MLSVEH_CDG_ID, 
+        MLSVEH_NMB_NAME,
+        TPSVEH_CDG_ID,
+        BRAVEH_CDG_ID
+        FROM
+        MODELS_VEHICULE
+        <where>
+            <if test="modelsVehicule.name != null and modelsVehicule.name !=''">
+                MLSVEH_NMB_NAME LIKE  #{modelsVehicule.name, jdbcType=VARCHAR}
+            </if>	
+        </where>
+    </select>
+    
+    <insert id="insertModelsVehicule" parameterType="com.yousoft.stram.domain.Vehicule" 
+        useGeneratedKeys="true" keyProperty="MLSVEH_CDG_ID">
+        INSERT INTO MODELS_VEHICULE 
+            (MLSVEH_NMB_NAME, TPSVEH_CDG_ID, BRAVEH_CDG_ID) 
+        VALUES 
+            (#{modelsVehicule.name}, #{modelsVehicule.typesVehicule.id}, #{modelsVehicule.brandsVehicule.id})
+    </insert>
+    
+</mapper>

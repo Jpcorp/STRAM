@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yousoft.stram.persistence.dao.DetailsOwnersMapper">
+    
+    <resultMap id="detailsOwners" type="com.yousoft.stram.domain.DetailsOwners">
+        <result property="cdgPatente" column="VEH_CDG_PATENTE" />
+        <result property="ownersVehicule.run" column="OWSVEH_CDG_RUN" />
+        <result property="fechAdquisicion" column="DETOWS_FCH_ADQUISICION" />
+        <result property="repertorio" column="DETOWS_REPERTORIO" />
+        <result property="nmro" column="DETOWS_NMR_NMRO" />
+    </resultMap>
+        
+    <select id="findById" resultMap="detailsOwners" parameterType="com.yousoft.stram.domain.Vehicule">
+        SELECT
+            D.VEH_CDG_PATENTE, 
+            D.OWSVEH_CDG_RUN,
+            D.DETOWS_NMR_NMRO,
+            D.DETOWS_REPERTORIO,
+            D.DETOWS_FCH_ADQUISICION
+        FROM
+            DETAILS_OWNERS D, 
+            OWNERS_VEHICULE O,
+            VEHICULES V
+        WHERE
+            D.VEH_CDG_PATENTE = V.VEH_CDG_PATENTE
+        AND D.OWSVEH_CDG_RUN = O.OWSVEH_CDG_RUN
+        <if test="patente != null and patente !=''">
+            AND D.VEH_CDG_PATENTE = #{patente}
+        </if>
+        <if test="detailsOwners.ownersVehicule.run != null and detailsOwners.ownersVehicule.run !=''">
+            AND D.OWSVEH_CDG_RUN = #{detailsOwners.ownersVehicule.run}
+        </if>
+    </select>
+    
+    <insert id="insertDetailsOwners" parameterType="com.yousoft.stram.domain.Vehicule">
+        INSERT INTO DETAILS_OWNERS 
+            (VEH_CDG_PATENTE, OWSVEH_CDG_RUN, DETOWS_FCH_ADQUISICION, DETOWS_REPERTORIO, DETOWS_NMR_NMRO) 
+        VALUES
+            (#{patente}, #{detailsOwners.ownersVehicule.run}, #{detailsOwners.fechAdquisicion}, 
+             #{detailsOwners.repertorio}, #{detailsOwners.nmro})
+    </insert>
+    
+</mapper>
