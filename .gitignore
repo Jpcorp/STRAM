@@ -4,4 +4,7 @@ target/
 *.classpath
 .settings/
 lib/
+.idea/
 nb-configuration.xml
+*.iml
+*.class
