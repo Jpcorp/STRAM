@@ -7,6 +7,11 @@
     <version>1.0-SNAPSHOT</version>
     <name>STRAM-1.0-view</name>
     <url>http://maven.apache.org</url>
+    
+    <properties>
+        <jsf.version>2.2.11</jsf.version>
+        
+    </properties>
 
     <repositories>
         <repository>
@@ -44,13 +49,13 @@
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
-            <version>2.1.11</version>
+            <version>${jsf.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-impl</artifactId>
-            <version>2.1.11</version>
+            <version>${jsf.version}</version>
         </dependency>
 
         <dependency>
@@ -84,11 +89,43 @@
             <version>2.0</version>
             <scope>provided</scope>
         </dependency>
-        
+                
         <dependency>
             <groupId>com.yousoft.stram</groupId>
             <artifactId>STRAM-1.0-domain</artifactId>
             <version>1.0</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.1.7.RELEASE</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.1.7.RELEASE</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>4.1.7.RELEASE</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.1-b04</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>el-api</artifactId>
+            <version>6.0.32</version>
+            <type>jar</type>
+            <scope>provided</scope>
         </dependency>
         
     </dependencies>
@@ -104,5 +141,24 @@
                 </configuration>
             </plugin>
         </plugins>
+        
+        <outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+        <finalName>STRAM-1.0-view</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <filtering>false</filtering>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>*</include>
+                </includes>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
     </build>
 </project>

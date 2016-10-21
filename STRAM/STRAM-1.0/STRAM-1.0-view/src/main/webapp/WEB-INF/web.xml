@@ -4,6 +4,13 @@
     <listener>
         <listener-class>org.primefaces.modena.filter.CharacterEncodingFilter</listener-class>
     </listener>
+    
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>WEB-INF/faces-config.xml</param-value>
+    </context-param>
+     
+     
     <filter>
         <filter-name>Character Encoding Filter</filter-name>
         <filter-class>org.primefaces.modena.filter.CharacterEncodingFilter</filter-class>

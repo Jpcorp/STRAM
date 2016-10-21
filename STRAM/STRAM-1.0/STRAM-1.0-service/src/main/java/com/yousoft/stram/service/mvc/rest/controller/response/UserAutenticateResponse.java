@@ -5,14 +5,12 @@
  */
 package com.yousoft.stram.service.mvc.rest.controller.response;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.yousoft.stram.domain.User;
 
 /**
  *
  * @author jguinart
  */
-@JsonSerialize
 public class UserAutenticateResponse {
     
     private String code;
