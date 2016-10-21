@@ -12,7 +12,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title>${app.nameApp}</title>
+        <title>${app.config.nameApp}</title>
         <ui:insert name="head" />
     </h:head>
 
@@ -24,27 +24,29 @@
                     <div class="EmptyBox30"></div>
                     <div class="Card ShadowEffect">
                         <div class="EmptyBox20"></div>
-                        <div class="Wid100 OvHidden BigTopic Fs30"><i class="icon-security Fs60 DispBlock"></i> Bienvenidos, a ${app.nameApp} ${app.versionApp}</div>
+                        <div class="Wid100 OvHidden BigTopic Fs30"><i class="icon-security Fs60 DispBlock"></i> #{lan['app.login.text.welcome']}, a ${app.config.nameApp} ${app.config.versionApp}</div>
                         <div class="EmptyBox30"></div>
-                        <div class="Wid100"><p:inputText value="${indexBeans.email}" placeholder="Email" styleClass="Wid80 TexAlCenter Fs18"/></div>
+                        <div class="Wid100"><p:inputText value="${indexBeans.email}" placeholder="Rut" styleClass="Wid80 TexAlCenter Fs18"/></div>
                         <div class="EmptyBox10"></div>
                         <div class="Wid100"><p:inputText value="${indexBeans.passwd}" type="password" placeholder="Password" styleClass="Wid80 TexAlCenter Fs18"/></div>
                         <div class="EmptyBox30"></div>
-                        <p:selectBooleanCheckbox value="accept" itemLabel="I Accept Terms And Policies"/>
+                        <p:selectBooleanCheckbox value="${indexBeans.accept}" itemLabel="Acepto los Terminos de acuerdo del sistema"/>
                         <div class="EmptyBox30"></div>
                         <div class="Wid50 Fleft Responsive50">
-                            <p:button onclick="${indexBeans.autenticate()}" value="Sign In / Sign Up" icon="fa fa-sign-in" styleClass=" Fs18 White RaisedButton Fright FloatNoneOnMobile" />
+                            <p:button outcome="/private/dashboard" onclick="${indexBeans.autenticate()}" value="Sign In / Sign Up" icon="fa fa-sign-in" styleClass=" Fs18 White RaisedButton Fright FloatNoneOnMobile" />
                         </div>
                         <div class="EmptyBox5 ShowOnMobile"></div>
                         <div class="Wid50 Fleft Responsive50">
-                            <p:button value="Forgot Password ?" icon="fa fa-lock" styleClass="RedButton Fs18 White RaisedButton Fleft FloatNoneOnMobile"/>
+                            <p:button outcome="recoverAccount" value="Forgot Password ?" icon="fa fa-lock" styleClass="RedButton Fs18 White RaisedButton Fleft FloatNoneOnMobile"/>
                         </div>
                         <div class="EmptyBox20"></div>
                         <div class="Separator"></div>
-                        <div class="EmptyBox20"></div>
+                        <div class="EmptyBox20">
+                            <p:messages showDetail="true" autoUpdate="true" closable="true" />
+                        </div>
                     </div>
                     <div class="Wid100 TexAlCenter MarTop20 Fs14 FontRobotoRegular Gray">
-                        <i class="fa fa-copyright"></i> ${app.nameApp} ${app.versionApp} <br/> Todos lo derechos de información y privacidad están reservados por la compañia.
+                        <i class="fa fa-copyright"></i> ${app.config.nameApp} ${app.config.versionApp} <br/> Todos lo derechos de información y privacidad están reservados por la compañia.
                     </div>
                 </div>
             </div>
