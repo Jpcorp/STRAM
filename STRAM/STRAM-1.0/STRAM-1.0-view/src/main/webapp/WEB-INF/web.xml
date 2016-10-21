@@ -1,41 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    
     <display-name>STRAM-1.0-view</display-name>
-    <listener>
-        <listener-class>org.primefaces.modena.filter.CharacterEncodingFilter</listener-class>
-    </listener>
-    <filter>
-        <filter-name>Character Encoding Filter</filter-name>
-        <filter-class>org.primefaces.modena.filter.CharacterEncodingFilter</filter-class>
-    </filter>
+    
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    
+    <!-- Segurity JSF 
+            <security-constraint>
+            <display-name>Public Site</display-name>
+            <web-resource-collection>	
+                <web-resource-name>PublicResources</web-resource-name>
+                <url-pattern>/login.jsf</url-pattern>
+                <url-pattern>/loginError.jsf</url-pattern>
+                <url-pattern>/index.jsf</url-pattern>
+                <url-pattern>/public/*</url-pattern>
+                <http-method>POST</http-method>
+                <http-method>GET</http-method>
+            </web-resource-collection>
+        </security-constraint>
+    -->
+    <!-- PRIVATE Site 	
+<security-constraint>
+    <display-name>Private Site</display-name>
+    <web-resource-collection>
+        <web-resource-name>PrivateResource</web-resource-name>
+        <url-pattern>/private/*</url-pattern>
+        <http-method>POST</http-method>
+        <http-method>GET</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>grp_user_latam</role-name>
+        <role-name>grp_admin_latam</role-name>
+    </auth-constraint>
+</security-constraint>
+    -->
+    
+    
+    
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+    <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
+    </welcome-file-list>
+    
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>server</param-value>
+    </context-param>
     
     <context-param>
         <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
         <param-value>/WEB-INF/primefaces-modena.taglib.xml</param-value>
     </context-param>
-    <!--context-param>
-        <param-name>facelets.SKIP_COMMENTS</param-name>
-        <param-value>true</param-value>
-    </context-param-->
-    <!-- Change to "Production" when you are ready to deploy -->
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
+    
+    <!-- Prime Faces -->
     <context-param>
         <param-name>primefaces.THEME</param-name>
         <param-value>modena</param-value>
     </context-param>
-    <!-- Welcome page -->
-    <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
-    </welcome-file-list>
-    <!-- JSF mapping -->
+    
+    <!-- Spring -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath*:spring-context.xml classpath*:spring-base-context.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
+
+    <!-- JSF -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
+    <filter>
+        <filter-name>Character Encoding Filter</filter-name>
+        <filter-class>org.primefaces.modena.filter.CharacterEncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Character Encoding Filter</filter-name>
+        <servlet-name>Faces Servlet</servlet-name>
+    </filter-mapping>
+
+	
     <!-- Map these files with JSF -->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
@@ -98,4 +162,5 @@
         <extension>svg#fontawesomeregular</extension>
         <mime-type>image/svg+xml</mime-type>
     </mime-mapping>
+
 </web-app>
