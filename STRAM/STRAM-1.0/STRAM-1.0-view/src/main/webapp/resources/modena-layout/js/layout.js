@@ -142,7 +142,7 @@ PrimeFaces.widget.Modena = PrimeFaces.widget.BaseWidget.extend({
                 $this.topMenu.find('.active-menu').removeClass('active-menu');
                 link.addClass('active-menu');
                 
-                if(submenu.length) {
+                if(submenu.length)Â {
                     submenu.addClass('active-menu');
                 }
             }
