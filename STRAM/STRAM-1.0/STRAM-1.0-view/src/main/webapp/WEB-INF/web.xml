@@ -2,6 +2,23 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     
     <display-name>STRAM-1.0-view</display-name>
+<<<<<<< HEAD
+=======
+    <listener>
+        <listener-class>org.primefaces.modena.filter.CharacterEncodingFilter</listener-class>
+    </listener>
+    
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>WEB-INF/faces-config.xml</param-value>
+    </context-param>
+     
+     
+    <filter>
+        <filter-name>Character Encoding Filter</filter-name>
+        <filter-class>org.primefaces.modena.filter.CharacterEncodingFilter</filter-class>
+    </filter>
+>>>>>>> master
     
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>

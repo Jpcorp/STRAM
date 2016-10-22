@@ -5,12 +5,17 @@
  */
 package com.yousoft.stram.view;
 
+<<<<<<< HEAD
 import com.yousoft.stram.view.utils.Configuration;
 import javax.faces.bean.ManagedBean;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedProperty;
 
+=======
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ApplicationScoped;
+>>>>>>> master
 
 /**
  *
@@ -19,6 +24,7 @@ import javax.faces.bean.ManagedProperty;
 @ManagedBean(name = "app")
 @ApplicationScoped
 public class applicationBean {
+<<<<<<< HEAD
 	
     @ManagedProperty(value="#{config}")
     private Configuration config;
@@ -44,5 +50,27 @@ public class applicationBean {
     public void setConfig(Configuration config) {
         this.config = config;
     }
+=======
+    
+    public final String nameApp = "STRAM";
+    
+    public final String versionApp = "1.0";
+
+    /**
+     * Creates a new instance of NewJSFManagedBean
+     */
+    public applicationBean() {
+    }
+
+    public String getNameApp() {
+        return nameApp;
+    }
+
+    public String getVersionApp() {
+        return versionApp;
+    }
+    
+    
+>>>>>>> master
     
 }
