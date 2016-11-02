@@ -5,7 +5,6 @@
  */
 package com.yousoft.stram.view.business.impl;
 
-import com.yousoft.stram.exception.StramViewException;
 import com.yousoft.stram.view.business.ProcessRecoveryService;
 
 /**

@@ -5,8 +5,6 @@
  */
 package com.yousoft.stram.view.business;
 
-import com.yousoft.stram.exception.StramViewException;
-
 /**
  *
  * @author jguinart

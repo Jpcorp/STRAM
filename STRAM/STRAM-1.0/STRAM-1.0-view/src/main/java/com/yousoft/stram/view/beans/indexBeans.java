@@ -19,20 +19,19 @@ import org.springframework.stereotype.Component;
  *
  * @author jguinart
  *
-@Component
-@ManagedBean
-@ViewScoped*/
+*/
 @Component
 @Scope("session")
 @Qualifier("indexBeans")
 public class indexBeans implements Serializable {
     
-    private boolean accept;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private boolean accept;
     private String email;
     private String passwd;
-    
-    @Autowired
-    AutentificateService autentificateService;
 
     public indexBeans() {
         
