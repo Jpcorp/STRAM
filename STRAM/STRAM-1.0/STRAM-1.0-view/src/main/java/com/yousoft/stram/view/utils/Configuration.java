@@ -6,7 +6,6 @@
 package com.yousoft.stram.view.utils;
 
 import java.io.Serializable;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  *
@@ -14,7 +13,12 @@ import org.springframework.beans.factory.annotation.Value;
  */
 public class Configuration implements Serializable {
     
-    public String nameApp;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public String nameApp;
 	
     public String versionApp;
 

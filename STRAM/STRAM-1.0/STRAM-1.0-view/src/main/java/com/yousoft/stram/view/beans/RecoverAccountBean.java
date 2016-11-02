@@ -5,12 +5,10 @@
  */
 package com.yousoft.stram.view.beans;
 
-import com.yousoft.stram.exception.StramViewException;
-import com.yousoft.stram.view.business.ProcessRecoveryService;
 import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
@@ -23,6 +21,10 @@ import javax.faces.context.FacesContext;
 public class RecoverAccountBean implements Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
      * Springs beans
      */
     //@ManagedProperty(value = "#{recoveryService}")
