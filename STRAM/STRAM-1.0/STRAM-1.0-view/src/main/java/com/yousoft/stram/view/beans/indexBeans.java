@@ -5,7 +5,6 @@
  */
 package com.yousoft.stram.view.beans;
 
-import com.yousoft.stram.view.busisness.AutentificateService;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;

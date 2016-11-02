@@ -27,9 +27,6 @@ public class applicationBean {
      */
     public applicationBean() {                
     }
-    
-    
-    
 
     /**
      * @return the config
